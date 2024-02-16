@@ -12,11 +12,41 @@
  ( ,,  )/ˇ
 ```
 
-## ✨ Getting started
+## ⭐️ Getting started: ASCII Animal
 
-```
+```shell
 $ npm i -g ts-animal
 $ ts-animal dance tiger
+```
+
+## ⭐️ Getting started: Progress Bar
+
+```ts
+const { makeProgress } = require("ts-animal/progress");
+
+const { update, done, show } = makeProgress({ animal: 'tiger', start: 30 });
+
+show();
+
+const something = () =>
+  new Promise((resolve) => {
+  setTimeout(() => {
+    resolve(Math.round(Math.random()));
+  }, 1000);
+});
+
+(async () => {
+  const items = Array.from({ length: 50 });
+  for (const _ of items) {
+    const res = await something();
+    update();
+
+    if (res) {
+      done();
+      return;
+    }
+  }
+})();
 ```
 
 ## 🧭 Navigate
